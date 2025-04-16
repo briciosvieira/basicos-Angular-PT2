@@ -29,10 +29,16 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },{
+                "glob": "**/*",
+                "input": "src/assets/",
+                "output": "/assets/"
               }
             ],
             "styles": [
-              "src/styles.scss"
+               "src/styles.scss",
+              "@angular/material/prebuilt-themes/azure-blue.css"
+             
             ],
             "scripts": []
           },
@@ -88,15 +94,23 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },{
+                "glob": "**/*",
+                "input": "src/assets/",
+                "output": "/assets/"
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "@angular/material/prebuilt-themes/purple-green.css"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "c6cf25be-0430-45b8-bb84-f23cba212dfe"
   }
 }

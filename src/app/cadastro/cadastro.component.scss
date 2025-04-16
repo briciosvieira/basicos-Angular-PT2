@@ -1,0 +1,29 @@
+.mt-20{
+    margin-top: 20px;
+}
+
+
+.mt-60{
+    margin-top: 60px;
+}
+
+.col-6{
+    width: 49%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.orange{
+    background-color: #ff6600;
+}
+.red{
+    background-color: #ff1e00;
+}
+
+.buttons-left {
+    display: flex;
+    justify-content: flex-end; 
+    margin-top: auto; /* empurra pro final se estiver em container flex vertical */
+    margin-right: 8px;
+}
+
