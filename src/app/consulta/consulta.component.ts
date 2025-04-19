@@ -1,4 +1,4 @@
-import {  Component, ViewChild, OnInit } from '@angular/core';
+import {  Component, ViewChild, OnInit, inject } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -9,6 +9,7 @@ import { MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import { cliente } from '../cadastro/cliente';
 import { ClienteService } from '../cliente.service';
 import { Router } from '@angular/router';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -21,25 +22,24 @@ import { Router } from '@angular/router';
     FormsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatIconModule
-  
-
+    MatIconModule,
+    MatSnackBarModule    
   ],
   templateUrl: './consulta.component.html',
   styleUrl: './consulta.component.scss'
 })
 export class ConsultaComponent implements OnInit {
 
+  nomeBusca: string = '';
+  listaClientes: cliente[] =[];
+  displayedColumns: string[] = ['id', 'nome', 'cpf','dataNascimento','email','acoes'];
+  snack: MatSnackBar = inject(MatSnackBar)
+
   constructor(
     private service: ClienteService,
     private router: Router
   ){ }
 
-  nomeBusca: string = '';
-  listaClientes: cliente[] =[];
-  displayedColumns: string[] = ['id', 'nome', 'cpf','dataNascimento','email','acoes'];
-
-  
   dataSource = new MatTableDataSource<cliente>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -72,7 +72,14 @@ export class ConsultaComponent implements OnInit {
   deletar(cliente: cliente){
     this.service.deletar(cliente);
     this.ngOnInit();
+    this.mostrarMensagemSnackBar("Deletado com sucesso")
    
+  }
+  //poupap que informar que uma ação foi realizada com sucesso.
+  mostrarMensagemSnackBar(messagem: string){
+    this.snack.open(messagem, "Ok", {
+      duration: 3000
+    })
   }
 
 }

@@ -8,13 +8,13 @@ export class cliente{
     cpf?:string
     dataNascimento?:string
     telefone?:string
+    estado?:string
+    municipio?: string
     deletando: boolean = false;
     
     static newCliente(){
         let cliente1 = new cliente();
-
         cliente1.id = uuid();
-
         return cliente1;
     }
 }

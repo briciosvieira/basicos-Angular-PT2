@@ -46,30 +46,49 @@ cada row tem por padrão 12 colunas  -->
                         <mat-form-field class="col-6">
                             <mat-label>CPF: *</mat-label>
                             <input type="text" matInput placeholder="Ex: 789.456.123-11" [(ngModel)]="cliente.cpf"
-                                name="cpf">
+                                mask="000.000.000-00" name="cpf">
                         </mat-form-field>
 
                         <mat-form-field class="col-6">
                             <mat-label>Data de nascimento: *</mat-label>
-                            <input type="date" matInput placeholder="Ex: 27/06/2025"
-                                [(ngModel)]="cliente.dataNascimento" name="dataNascimento">
+                            <input type="text" matInput placeholder="Ex: 27/06/2025"
+                                [(ngModel)]="cliente.dataNascimento" mask="00/00/0000" name="dataNascimento">
                         </mat-form-field>
-
 
                     </div>
 
                     <div fxLayout="row" fxLayoutAling="start" fxLayoutGap="16px" class="mt-20">
                         <mat-form-field class="col-6">
                             <mat-label>Telefone: *</mat-label>
-                            <input type="tel" matInput placeholder="(71) 81441233" [(ngModel)]="cliente.telefone"
-                                name="telefone">
+                            <input type="tel" matInput placeholder="(71) 00000-0000" [(ngModel)]="cliente.telefone"
+                                mask="(00)00000-0000" name="telefone">
                         </mat-form-field>
-                    </div>
 
+                        <div fxLayout="row" fxLayoutAling="start" fxLayoutGap="16px">
+
+                            <mat-form-field class="col-6">
+                                <mat-label>UF *</mat-label>
+                                <mat-select (selectionChange)="carregarMunicipios($event)">
+                                    <mat-option *ngFor="let uf of estados" [value]="uf.sigla">
+                                        {{uf.sigla}} 
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="col-6">
+                                <mat-label>Municipios *</mat-label>
+                                <mat-select>
+                                    <mat-option *ngFor="let mun of municipios" [value]="mun.nome">
+                                        {{mun.nome}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                        </div>
+                    </div>
                 </mat-card-content>
 
                 <mat-card-actions class="buttons-left" fxLayoutGap="10px">
-
                     @if (!atualizando) {
                     <button mat-flat-button type="submit">
                         <mat-icon fontIcon="save"></mat-icon>
@@ -77,7 +96,7 @@ cada row tem por padrão 12 colunas  -->
                     </button>
 
                     }@else {
-                    <button mat-flat-button class="orange" >
+                    <button mat-flat-button class="orange">
                         <mat-icon fontIcon="refresh"></mat-icon>
                         Atualizar
                     </button>
@@ -87,7 +106,6 @@ cada row tem por padrão 12 colunas  -->
                         <mat-icon fontIcon="clear"></mat-icon>
                         Limpar
                     </button>
-
                 </mat-card-actions>
             </mat-card>
         </form>
